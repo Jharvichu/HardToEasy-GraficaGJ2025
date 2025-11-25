@@ -119,6 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &54047204
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +458,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262770893}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
 --- !u!1 &318666714
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +522,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
+<<<<<<< HEAD
   orthographic size: 1000
+=======
+  orthographic size: 5
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -544,7 +551,11 @@ Transform:
   m_GameObject: {fileID: 318666714}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 1261, y: 726, z: -10}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -594,6 +605,7 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+<<<<<<< HEAD
 --- !u!1 &411949849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,6 +1623,8 @@ MonoBehaviour:
   textoInstrucciones: {fileID: 608814762}
   repisaObject: {fileID: 1878244474}
   areaPortafoliosObject: {fileID: 411949849}
+=======
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
 --- !u!1 &1457212270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,12 +1723,17 @@ Transform:
   m_GameObject: {fileID: 1457212270}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -7.11, y: -2.7, z: 0}
+=======
+  m_LocalPosition: {x: -9.71, y: -3.64, z: 0}
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1520514397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,11 +2412,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: facff56bc7875484f99177422932f3ee, type: 3}
+=======
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 318666717}
   - {fileID: 1457212273}
+<<<<<<< HEAD
   - {fileID: 1886687625}
   - {fileID: 1520514400}
+=======
+>>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
