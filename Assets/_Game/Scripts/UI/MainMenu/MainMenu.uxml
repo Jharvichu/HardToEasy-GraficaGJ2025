@@ -1,0 +1,28 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Game/Scripts/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=4b34e7e817e342a45a0dcd6f8a848724&amp;type=3#Style" />
+    
+    <ui:VisualElement name="ContenedorPrincipal" class="contenedor">
+        <ui:VisualElement name="Izquierda" class="vacio" />
+        <ui:VisualElement name="Centro" class="principal">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 6; width: 100%;" />
+            <ui:VisualElement class="grupo-botones">
+                <ui:Button text="JUGAR" name="BtnJugar" class="boton-menu" />
+                <ui:Button text="OPCIONES" name="BtnOpciones" class="boton-menu" />
+                <ui:Button text="CREDITOS" name="BtnCreditos" class="boton-menu" />
+                <ui:Button text="SALIR" name="BtnSalir" class="boton-menu" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Derecha" class="vacio" />
+    </ui:VisualElement>
+
+    <ui:VisualElement name="PantallaOpciones" class="overlay oculto">
+        <ui:VisualElement class="panel-opciones">
+            <ui:Label text="CONFIGURACIÓN" name="Label" class="texto-titulo" style="font-size: 50px;" />
+            <ui:Label text="Volumen: 100%" style="color: white; margin-top: 20px;" />
+            <ui:Button text="VOLVER" name="BtnVolver" class="boton-menu" style="margin-top: 50px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <ui:VisualElement name="Cortina" class="cortina" picking-mode="Ignore" />
+
+</ui:UXML>
