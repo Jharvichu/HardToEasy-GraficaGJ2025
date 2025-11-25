@@ -22,7 +22,7 @@ public class MiniJuegoBase : MonoBehaviour
             botonCerrar.onClick.AddListener(CerrarMiniJuego);
 
         // Ocultar al inicio
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 
     public virtual void IniciarMinijuego()
