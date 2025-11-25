@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MiniJuegoBase : MonoBehaviour
 {
-    [Header("Configuración del Minijuego")]
+    [Header("Configuraciï¿½n del Minijuego")]
     public string nombreMinijuego;
     public bool minijuegoActivo = false;
 
@@ -17,9 +18,16 @@ public class MiniJuegoBase : MonoBehaviour
 
     void Start()
     {
-        // Configurar botón cerrar
+        // Configurar botÃ³n cerrar
         if (botonCerrar != null)
+        {
             botonCerrar.onClick.AddListener(CerrarMiniJuego);
+            Debug.Log($"[MiniJuegoBase] BotÃ³n cerrar configurado en: {botonCerrar.name}");
+        }
+        else
+        {
+            Debug.LogWarning("[MiniJuegoBase] botonCerrar NO estÃ¡ asignado!");
+        }
 
         // Ocultar al inicio
         gameObject.SetActive(true);
@@ -46,14 +54,16 @@ public class MiniJuegoBase : MonoBehaviour
 
     public void CerrarMiniJuego()
     {
+        Debug.Log("Juego cerrado");
         TerminarMinijuego(false);
     }
 
     void Update()
     {
-        // Cerrar con ESC
-        if (minijuegoActivo && Input.GetKeyDown(KeyCode.Escape))
+        // Cerrar con ESC usando el nuevo Input System
+        if (minijuegoActivo && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            Debug.Log("[MiniJuegoBase] ESC presionado, cerrando minijuego...");
             CerrarMiniJuego();
         }
     }

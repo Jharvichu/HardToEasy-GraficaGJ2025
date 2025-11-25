@@ -16,6 +16,34 @@ public class MinijuegoPortafolios : MiniJuegoBase
     private ZonaSoltado[] zonasRepisa;
     private GameObject[] portafoliosObjects;
 
+    void Awake()
+    {
+        // Componente inicializado
+    }
+
+    void Start()
+    {
+        // Verificar GraphicRaycaster
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas != null)
+        {
+            UnityEngine.UI.GraphicRaycaster raycaster = canvas.GetComponent<UnityEngine.UI.GraphicRaycaster>();
+            if (raycaster == null)
+            {
+                canvas.gameObject.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+            }
+        }
+        
+        // Configurar boton cerrar
+        if (botonCerrar != null)
+        {
+            botonCerrar.onClick.RemoveAllListeners();
+            botonCerrar.onClick.AddListener(CerrarMiniJuego);
+        }
+        
+        IniciarMinijuego();
+    }
+
     public enum DificultadMiniJuego
     {
         Facil,    // A-B-C
@@ -24,14 +52,42 @@ public class MinijuegoPortafolios : MiniJuegoBase
 
     void BuscarTodosLosElementos()
     {
-        // Buscar zonas automáticamente
+        // Buscar zonas
         if (repisaObject != null)
         {
-            zonasRepisa = repisaObject.GetComponentsInChildren<ZonaSoltado>();
-            Debug.Log("Encontradas " + zonasRepisa.Length + " zonas en la repisa");
+            zonasRepisa = repisaObject.GetComponentsInChildren<ZonaSoltado>(true);
+            
+            if (zonasRepisa.Length == 0)
+            {
+                List<ZonaSoltado> zonasList = new List<ZonaSoltado>();
+                
+                foreach (Transform child in repisaObject.transform)
+                {
+                    if (child.name.StartsWith("Zona"))
+                    {
+                        ZonaSoltado zona = child.GetComponent<ZonaSoltado>();
+                        if (zona == null)
+                        {
+                            zona = child.gameObject.AddComponent<ZonaSoltado>();
+                        }
+                        
+                        Image img = child.GetComponent<Image>();
+                        if (img == null)
+                        {
+                            img = child.gameObject.AddComponent<Image>();
+                            img.color = new Color(1, 1, 1, 0);
+                        }
+                        img.raycastTarget = true;
+                        
+                        zonasList.Add(zona);
+                    }
+                }
+                
+                zonasRepisa = zonasList.ToArray();
+            }
         }
 
-        // Buscar portafolios automáticamente
+        // Buscar portafolios
         if (areaPortafoliosObject != null)
         {
             List<GameObject> portafoliosList = new List<GameObject>();
@@ -40,21 +96,32 @@ public class MinijuegoPortafolios : MiniJuegoBase
                 if (child.name.Contains("Portafolio"))
                 {
                     portafoliosList.Add(child.gameObject);
+                    
+                    ArrastrarPortafolio arrastre = child.GetComponent<ArrastrarPortafolio>();
+                    if (arrastre == null)
+                    {
+                        arrastre = child.gameObject.AddComponent<ArrastrarPortafolio>();
+                    }
+                    
+                    Image img = child.GetComponent<Image>();
+                    if (img != null)
+                    {
+                        img.raycastTarget = true;
+                    }
                 }
             }
             portafoliosObjects = portafoliosList.ToArray();
-            Debug.Log("Encontrados " + portafoliosObjects.Length + " portafolios");
         }
     }
 
     public override void IniciarMinijuego()
     {
-        BuscarTodosLosElementos(); // ← ¡IMPORTANTE!
-
-        base.IniciarMinijuego();
+        BuscarTodosLosElementos();
         ConfigurarDificultad();
         MezclarPortafolios();
-        ActualizarInstrucciones();
+        
+        minijuegoActivo = true;
+        gameObject.SetActive(true);
     }
 
     void ConfigurarDificultad()
@@ -109,9 +176,10 @@ public class MinijuegoPortafolios : MiniJuegoBase
 
     void MezclarPortafolios()
     {
+        // Liberar zonas
         foreach (ZonaSoltado zona in zonasRepisa)
         {
-            if (zona.gameObject.activeInHierarchy)
+            if (zona != null && zona.gameObject.activeInHierarchy)
             {
                 zona.LiberarZona();
             }
@@ -120,19 +188,28 @@ public class MinijuegoPortafolios : MiniJuegoBase
         List<GameObject> portafoliosActivos = new List<GameObject>();
         foreach (GameObject portafolio in portafoliosObjects)
         {
-            if (portafolio.activeInHierarchy)
+            if (portafolio != null && portafolio.activeInHierarchy)
             {
                 portafoliosActivos.Add(portafolio);
-                portafolio.transform.SetParent(areaPortafoliosObject.transform);
+                
+                if (portafolio.transform.parent != areaPortafoliosObject.transform)
+                {
+                    portafolio.transform.SetParent(areaPortafoliosObject.transform, false);
+                }
 
                 ArrastrarPortafolio arrastre = portafolio.GetComponent<ArrastrarPortafolio>();
                 if (arrastre != null)
                 {
+                    if (arrastre.letraPortafolio == null || arrastre.letraPortafolio == "")
+                    {
+                        arrastre.letraPortafolio = portafolio.name.Substring(portafolio.name.Length - 1);
+                    }
                     arrastre.VolverAPosicionOriginal();
                 }
             }
         }
 
+        // Mezclar posiciones
         for (int i = 0; i < portafoliosActivos.Count; i++)
         {
             int randomIndex = Random.Range(0, portafoliosActivos.Count);
@@ -141,6 +218,16 @@ public class MinijuegoPortafolios : MiniJuegoBase
                 portafoliosActivos[randomIndex].GetComponent<RectTransform>().anchoredPosition;
             portafoliosActivos[randomIndex].GetComponent<RectTransform>().anchoredPosition = tempPos;
         }
+        
+        // Actualizar posiciones originales
+        foreach (GameObject portafolio in portafoliosActivos)
+        {
+            ArrastrarPortafolio arrastre = portafolio.GetComponent<ArrastrarPortafolio>();
+            if (arrastre != null)
+            {
+                arrastre.ActualizarPosicionOriginal();
+            }
+        }
     }
 
     public void VerificarOrden()
@@ -148,37 +235,98 @@ public class MinijuegoPortafolios : MiniJuegoBase
         if (zonasRepisa == null) return;
 
         bool ordenCorrectoCompleto = true;
+        int zonasCorrectas = 0;
 
         for (int i = 0; i < ordenCorrecto.Count; i++)
         {
             if (i < zonasRepisa.Length && zonasRepisa[i].gameObject.activeInHierarchy)
             {
-                if (!zonasRepisa[i].TienePortafolioCorrecto())
+                bool correcto = zonasRepisa[i].TienePortafolioCorrecto();
+                
+                if (correcto)
+                {
+                    zonasCorrectas++;
+                }
+                else
                 {
                     ordenCorrectoCompleto = false;
-                    break;
                 }
             }
         }
 
-        if (ordenCorrectoCompleto)
+        if (ordenCorrectoCompleto && zonasCorrectas == ordenCorrecto.Count)
         {
-            textoInstrucciones.text = "¡CORRECTO! Orden alfabético logrado";
-            textoInstrucciones.color = Color.green;
+            Debug.Log("Juego completado correctamente");
             TerminarMinijuego(true);
         }
     }
 
-    void ActualizarInstrucciones()
+
+    
+    // Detectar zona mas cercana
+    public ZonaSoltado DetectarZonaCercana(Vector3 posicionMundo)
     {
-        if (dificultad == DificultadMiniJuego.Facil)
+        if (zonasRepisa == null || zonasRepisa.Length == 0) return null;
+        
+        float distanciaMinima = 400f;
+        ZonaSoltado zonaMasCercana = null;
+        
+        foreach (ZonaSoltado zona in zonasRepisa)
         {
-            textoInstrucciones.text = "Arrastra los portafolios a la repisa en orden A-B-C";
+            if (zona == null || !zona.gameObject.activeInHierarchy) continue;
+            
+            RectTransform zonaRect = zona.GetComponent<RectTransform>();
+            if (zonaRect == null) continue;
+            
+            float distancia = Vector3.Distance(zonaRect.position, posicionMundo);
+            
+            if (distancia < distanciaMinima)
+            {
+                distanciaMinima = distancia;
+                zonaMasCercana = zona;
+            }
+        }
+        
+        return zonaMasCercana;
+    }
+    
+    // Colocar portafolio en zona
+    public void ColocarPortafolioEnZona(ArrastrarPortafolio portafolio, ZonaSoltado zona)
+    {
+        if (portafolio == null || zona == null) return;
+        
+        // Liberar zona anterior
+        foreach (ZonaSoltado z in zonasRepisa)
+        {
+            if (z != null && z.portafolioActual == portafolio && z != zona)
+            {
+                z.LiberarZona();
+            }
+        }
+        
+        // Devolver portafolio anterior si existe
+        if (zona.ocupada && zona.portafolioActual != null && zona.portafolioActual != portafolio)
+        {
+            zona.portafolioActual.VolverAPosicionOriginal();
+        }
+        
+        // Colocar portafolio
+        RectTransform portafolioRect = portafolio.GetComponent<RectTransform>();
+        portafolio.transform.SetParent(zona.transform, true);
+        portafolioRect.anchoredPosition = Vector2.zero;
+        portafolio.enRepisa = true;
+        
+        zona.ocupada = true;
+        zona.portafolioActual = portafolio;
+        
+        // Log de posicion
+        if (portafolio.letraPortafolio == zona.letraCorrecta)
+        {
+            Debug.Log($"Portafolio {portafolio.name} colocado en posicion correcta");
         }
         else
         {
-            textoInstrucciones.text = "Arrastra los portafolios a la repisa en orden A-B-C-D-E";
+            Debug.Log($"Portafolio {portafolio.name} colocado en posicion incorrecta");
         }
-        textoInstrucciones.color = Color.white;
     }
 }
