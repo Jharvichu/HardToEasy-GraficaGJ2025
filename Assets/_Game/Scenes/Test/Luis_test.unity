@@ -2412,16 +2412,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: facff56bc7875484f99177422932f3ee, type: 3}
-=======
->>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 318666717}
   - {fileID: 1457212273}
-<<<<<<< HEAD
   - {fileID: 1886687625}
   - {fileID: 1520514400}
-=======
->>>>>>> cf8726a8aa1e1872d341654e8422c6bd915f5734
