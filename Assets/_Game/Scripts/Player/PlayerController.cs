@@ -105,9 +105,12 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        
+        Debug.Log(mousePosition);
 
         if (hit.collider != null)
         {
+            Debug.Log("Clicking object");
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             clickable?.OnClick();
         }

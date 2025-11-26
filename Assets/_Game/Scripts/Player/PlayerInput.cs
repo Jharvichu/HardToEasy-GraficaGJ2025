@@ -1,34 +1,42 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private PlayerData playerData;
-    
-    public delegate void StateChangeRequested();
-    public delegate void InteractionRequested(Vector2 mousePosition);
-    
-    public event StateChangeRequested OnStateChangeRequested;
-    public event InteractionRequested OnInteractionRequested;
+    public event System.Action OnStateChangeRequested;
+    public event System.Action<Vector2> OnInteractionRequested;
 
-    private void Update()
+    private PlayerInputActions inputActions;
+    
+    private void Awake()
     {
-        DetectStateChangeInput();
-        DetectInteractionInput();
+        inputActions = new PlayerInputActions();
     }
     
-    private void DetectStateChangeInput()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(playerData.StateChangeKey))
-        {
-            OnStateChangeRequested?.Invoke();
-        }
+        inputActions.Enable();
+        
+        inputActions.Player.StateChange.performed += OnStateChangePerformed;
+        inputActions.Player.Interact.performed += OnInteractPerformed;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.StateChange.performed -= OnStateChangePerformed;
+        inputActions.Player.Interact.performed -= OnInteractPerformed;
+        
+        inputActions.Disable();
     }
     
-    private void DetectInteractionInput()
+    private void OnStateChangePerformed(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            OnInteractionRequested?.Invoke(Input.mousePosition);
-        }
+        OnStateChangeRequested?.Invoke();
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext context)
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        OnInteractionRequested?.Invoke(mousePosition);
     }
 }
