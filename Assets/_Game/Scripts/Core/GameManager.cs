@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    void InitializeGame()
+    public void InitializeGame()
     {
+        Debug.Log("Esta en el menu");
         currentState = GameState.MainMenu;
-        StartGame();
     }
     
     // State management
@@ -49,17 +49,19 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
-        InitializeGame();
+        Debug.Log("Esta en la partida");
         ChangeState(GameState.Playing);
     }
     
     public void PauseGame()
     {
+        Debug.Log("Esta pausando en la partida");
         ChangeState(GameState.Paused);
     }
     
     public void ResumeGame()
     {
+        Debug.Log("Esta continuando en la partida");
         ChangeState(GameState.Playing);
     }
     
