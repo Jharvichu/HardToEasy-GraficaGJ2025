@@ -1,6 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Game/Scripts/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=4b34e7e817e342a45a0dcd6f8a848724&amp;type=3#Style" />
-    
+    <Style src="project://database/Assets/_Game/Scripts/UI/MainMenu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=4b34e7e817e342a45a0dcd6f8a848724&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="ContenedorPrincipal" class="contenedor">
         <ui:VisualElement name="Izquierda" class="vacio" />
         <ui:VisualElement name="Centro" class="principal">
@@ -16,10 +15,21 @@
     </ui:VisualElement>
 
     <ui:VisualElement name="PantallaOpciones" class="overlay oculto">
-        <ui:VisualElement class="panel-opciones">
-            <ui:Label text="CONFIGURACIÓN" name="Label" class="texto-titulo" style="font-size: 50px;" />
-            <ui:Label text="Volumen: 100%" style="color: white; margin-top: 20px;" />
-            <ui:Button text="VOLVER" name="BtnVolver" class="boton-menu" style="margin-top: 50px;" />
+        <ui:VisualElement class="panel-opciones" style="justify-content: space-around;">
+            <ui:Label text="CONFIGURACIÓN" name="LabelTitulo" class="texto-titulo" style="font-size: 50px; margin-bottom: 30px;" />
+            <ui:VisualElement class="fila-opcion">
+                <ui:Label text="VOLUMEN" class="texto-etiqueta" />
+                <ui:Slider name="SliderVolumen" low-value="0" high-value="100" value="100" class="slider-retro" />
+            </ui:VisualElement>
+            <ui:VisualElement class="fila-opcion">
+                <ui:Label text="SILENCIAR" class="texto-etiqueta" />
+                <ui:Toggle name="ToggleMute" class="toggle-retro" />
+            </ui:VisualElement>
+            <ui:VisualElement class="fila-opcion">
+                <ui:Label text="PANTALLA COMPLETA" class="texto-etiqueta" />
+                <ui:Toggle name="ToggleFullscreen" class="toggle-retro" />
+            </ui:VisualElement>
+            <ui:Button text="VOLVER" name="BtnVolver" class="boton-menu" style="margin-top: 40px; width: 50%; height: 60px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 

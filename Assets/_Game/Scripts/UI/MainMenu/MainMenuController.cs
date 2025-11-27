@@ -76,7 +76,6 @@ public class MainMenuController : MonoBehaviour
 
     private void OpenOptions()
     {
-        Debug.Log("Abrio Opciones");
         _optionsWindow.RemoveFromClassList("oculto");
     }
 

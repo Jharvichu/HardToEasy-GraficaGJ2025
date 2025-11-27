@@ -1,0 +1,255 @@
+.hud-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.top-container {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.timer-texto {
+    font-size: 40px;
+    color: rgb(112, 219, 238);
+    -unity-font-style: bold;
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+    top: 0;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.boton-pausa-hud {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    background-color: rgb(239, 234, 207);
+    border-width: 4px;
+    border-color: rgb(45, 35, 35);
+    border-bottom-width: 8px;
+    margin-top: 0;
+}
+
+.boton-pausa-hud:active {
+    border-bottom-width: 4px;
+    translate: 0 4px;
+}
+
+.bottom-container {
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.stats-group {
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(45, 35, 35, 0.5);
+}
+
+.marco-retrato {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(60, 60, 65);
+    border-width: 4px;
+    border-color: rgb(239, 234, 207);
+    margin-right: 15px;
+}
+
+.imagen-retrato {
+    width: 100%;
+    height: 100%;
+    cursor: url("project://database/Assets/_Game/Art/Sprites/UI/Perfil%20Despierto.png?fileID=2800000&guid=28adc90a5483f604eadd7bdd3000c94f&type=3#Perfil Despierto");
+}
+
+.info-columna {
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 5px;
+}
+
+.etiqueta-pequena {
+    font-size: 18px;
+    color: rgb(200, 200, 200);
+    margin-right: 5px;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.texto-estado {
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    text-shadow: 2px 2px 0 black;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.barra-contenedor {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.icono-barra {
+    width: 25px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-right: 5px;
+    border-width: 2px;
+    border-color: rgb(239, 234, 207);
+}
+
+.barra-retro {
+    width: 200px;
+    height: 20px;
+}
+
+.barra-retro .unity-progress-bar__background {
+    background-color: rgb(30, 30, 30);
+    border-width: 2px;
+    border-color: rgb(239, 234, 207);
+    border-radius: 0;
+}
+
+.barra-retro .unity-progress-bar__fill {
+    background-color: rgb(62, 184, 209);
+    margin: 2px;
+}
+
+.boton-menu {
+    width: 90%;
+    height: 50px;
+    margin-bottom: 10px;
+    background-color: rgb(239, 234, 207);
+    color: rgb(50, 50, 50);
+    border-color: rgb(45, 35, 35);
+    border-width: 3px;
+    border-bottom-width: 8px;
+    border-radius: 4px;
+    font-size: 24px;
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.boton-menu:active {
+    border-bottom-width: 3px;
+    translate: 0 5px;
+    background-color: rgb(200, 195, 170);
+}
+
+.boton-menu-rojo {
+    width: 90%;
+    height: 50px;
+    background-color: rgb(200, 80, 80);
+    color: white;
+    border-color: rgb(45, 35, 35);
+    border-width: 3px;
+    border-bottom-width: 8px;
+    font-size: 24px;
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.boton-menu-rojo:active {
+    border-bottom-width: 3px;
+    translate: 0 5px;
+    background-color: rgb(150, 50, 50);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-pausa {
+    width: 500px;
+    background-color: rgb(60, 60, 65);
+    border-width: 6px;
+    border-color: rgb(239, 234, 207);
+    padding: 30px;
+    align-items: center;
+}
+
+.titulo-pausa {
+    font-size: 50px;
+    color: rgb(239, 234, 207);
+    margin-bottom: 30px;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.oculto {
+    display: none;
+}
+
+.cortina {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 1s; 
+    transition-timing-function: ease-in-out;
+}
+
+.cortina-cerrada {
+    opacity: 1;
+}
+
+.fila-opcion {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.texto-etiqueta {
+    color: white;
+    font-size: 20px;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.slider-retro {
+    width: 150px;
+}
+
+.slider-retro #unity-tracker {
+    background-color: rgb(30, 30, 35);
+    height: 8px;
+}
+
+.slider-retro #unity-dragger {
+    width: 15px;
+    height: 25px;
+    background-color: rgb(239, 234, 207);
+    margin-top: -8px;
+}
+
+.toggle-retro #unity-checkmark {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(30, 30, 35);
+    border-color: rgb(239, 234, 207);
+    border-width: 2px;
+    -unity-background-image-tint-color: rgb(239, 234, 207);
+}

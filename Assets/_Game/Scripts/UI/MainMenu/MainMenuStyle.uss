@@ -26,14 +26,15 @@
 
 .boton-menu {
     width: 80%;
-    height: 60px;
+    height: 70px;
     margin-bottom: 20px;
-    background-color: rgb(22, 26, 50);
+    background-color: rgb(239, 234, 207);
+    color: rgb(50, 50, 50);
+    border-color: rgb(45, 35, 35);
     border-width: 4px;
-    border-color: rgb(62, 184, 209);
-    border-radius: 0;
-    color: rgb(255, 255, 255);
-    font-size: 30px;
+    border-bottom-width: 12px;
+    border-radius: 6px;
+    font-size: 32px;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
     transition-duration: 0.1s;
@@ -41,17 +42,16 @@
 }
 
 .boton-menu:hover {
-    background-color: rgb(62, 184, 209);
+    background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-    border-color: rgb(255, 255, 255);
-    scale: 1.05 1.05;
+    scale: 1.02 1.02;
 }
 
 .boton-menu:active {
-    background-color: rgb(255, 255, 255);
-    border-color: rgb(62, 184, 209);
-    color: rgb(0, 0, 0);
-    scale: 0.95 0.95;
+    border-bottom-width: 4px;
+    translate: 0 8px;
+    background-color: rgb(200, 195, 170);
+    color: rgb(50, 50, 50);
 }
 
 .overlay {
@@ -60,7 +60,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(15, 12, 12, 0.85);
     align-items: center;
     justify-content: center;
     transition-duration: 0.2s;
@@ -69,9 +69,10 @@
 .panel-opciones {
     width: 60%;
     height: 70%;
-    background-color: rgb(22, 26, 50);
-    border-width: 4px;
-    border-color: rgb(62, 184, 209);
+    background-color: rgb(60, 60, 65);
+    border-width: 8px;
+    border-color: rgb(239, 234, 207);
+    border-radius: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -89,7 +90,7 @@
     height: 100%;
     background-color: rgb(0, 0, 0);
     opacity: 0;
-    
+
     transition-property: opacity;
     transition-duration: 1s; 
     transition-timing-function: ease-in-out;
@@ -97,4 +98,83 @@
 
 .cortina-cerrada {
     opacity: 1;
+}
+
+.panel-opciones {
+    width: 60%;
+    height: 70%;
+    background-color: rgb(60, 60, 65);
+    border-width: 8px;
+    border-color: rgb(239, 234, 207);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    padding: 40px;
+}
+
+.texto-titulo {
+    color: rgb(239, 234, 207);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.fila-opcion {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.texto-etiqueta {
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.slider-retro {
+    width: 250px;
+    margin-top: 10px;
+}
+
+.slider-retro #unity-tracker {
+    background-color: rgb(30, 30, 35);
+    border-width: 2px;
+    border-color: rgb(200, 200, 200);
+    height: 10px;
+    margin-top: -5px;
+}
+
+.slider-retro #unity-dragger {
+    width: 20px;
+    height: 30px;
+    background-color: rgb(239, 234, 207);
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    border-radius: 4px;
+    margin-top: -10px;
+}
+
+.toggle-retro {
+    margin-right: 0;
+}
+
+.toggle-retro #unity-checkmark {
+    width: 35px;
+    height: 35px;
+    background-color: rgb(30, 30, 35);
+    border-width: 4px;
+    border-color: rgb(239, 234, 207);
+    border-radius: 4px;
+    -unity-background-image-tint-color: rgb(239, 234, 207);
+}
+
+.toggle-retro:hover #unity-checkmark {
+    border-color: rgb(255, 255, 255);
+}
+
+.toggle-retro:checked #unity-checkmark {
+    background-color: rgb(30, 30, 35);
 }
