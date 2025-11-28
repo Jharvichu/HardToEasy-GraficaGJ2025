@@ -77,7 +77,7 @@ public class ArrastrarPortafolio : MonoBehaviour, IBeginDragHandler, IDragHandle
         canvasGroup.blocksRaycasts = true;
 
         // Detectar zona cercana
-        MinijuegoPortafolios minijuego = FindObjectOfType<MinijuegoPortafolios>();
+        MinijuegoPortafolios minijuego = FindFirstObjectByType<MinijuegoPortafolios>();
         if (minijuego != null)
         {
             ZonaSoltado zonaDetectada = minijuego.DetectarZonaCercana(rectTransform.position);

@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     
-    public enum GameState { MainMenu, Playing, Paused}
+    public enum GameState { MainMenu, Playing, Paused, GameOver }
     public GameState currentState { get; private set; }
     
     public delegate void GameStateChanged(GameState newState);
@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 break;
             case GameState.Paused:
+                Time.timeScale = 0f;
+                break;
+            case GameState.GameOver:
                 Time.timeScale = 0f;
                 break;
         }
