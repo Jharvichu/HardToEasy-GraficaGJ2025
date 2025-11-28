@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
         currentState = GameState.MainMenu;
     }
     
-    // State management
     public void ChangeState(GameState newState)
     {
         currentState = newState;
