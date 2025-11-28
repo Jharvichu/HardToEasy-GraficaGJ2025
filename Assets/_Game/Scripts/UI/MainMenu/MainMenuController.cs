@@ -17,6 +17,11 @@ public class MainMenuController : MonoBehaviour
         _doc = GetComponent<UIDocument>();
     }
 
+    void Start()
+    {
+        GameManager.Instance.InitializeGame();
+    }
+
     void OnEnable()
     {
         VisualElement root = _doc.rootVisualElement;
@@ -64,6 +69,7 @@ public class MainMenuController : MonoBehaviour
 
     private void StartGame()
     {
+        GameManager.Instance.StartGame();
         StartCoroutine(SceneLoad("Office_1"));
     }
 
@@ -86,7 +92,7 @@ public class MainMenuController : MonoBehaviour
 
     private void QuitGame()
     {
-        Application.Quit();
+        GameManager.Instance.QuitGame();
     }
 
     private void ReturnToMenu()

@@ -3,7 +3,7 @@
     <ui:VisualElement name="ContenedorPrincipal" class="contenedor">
         <ui:VisualElement name="Izquierda" class="vacio" />
         <ui:VisualElement name="Centro" class="principal">
-            <ui:VisualElement name="VisualElement" style="flex-grow: 6; width: 100%;" />
+            <ui:VisualElement name="VisualElement" style="flex-grow: 6; width: 111%; background-image: url(&quot;project://database/Assets/_Game/Art/Sprites/UI/Logo%202.png?fileID=2800000&amp;guid=280a1455814ae6245ade126450c68da5&amp;type=3#Logo 2&quot;); background-size: 196% 272%; justify-content: center; align-self: center; align-items: center; left: 12px; top: 22px;" />
             <ui:VisualElement class="grupo-botones">
                 <ui:Button text="JUGAR" name="BtnJugar" class="boton-menu" />
                 <ui:Button text="OPCIONES" name="BtnOpciones" class="boton-menu" />
@@ -13,7 +13,6 @@
         </ui:VisualElement>
         <ui:VisualElement name="Derecha" class="vacio" />
     </ui:VisualElement>
-
     <ui:VisualElement name="PantallaOpciones" class="overlay oculto">
         <ui:VisualElement class="panel-opciones" style="justify-content: space-around;">
             <ui:Label text="CONFIGURACIÓN" name="LabelTitulo" class="texto-titulo" style="font-size: 50px; margin-bottom: 30px;" />
@@ -32,7 +31,5 @@
             <ui:Button text="VOLVER" name="BtnVolver" class="boton-menu" style="margin-top: 40px; width: 50%; height: 60px;" />
         </ui:VisualElement>
     </ui:VisualElement>
-
-    <ui:VisualElement name="Cortina" class="cortina" picking-mode="Ignore" />
-
+    <ui:VisualElement name="Cortina" picking-mode="Ignore" class="cortina" />
 </ui:UXML>

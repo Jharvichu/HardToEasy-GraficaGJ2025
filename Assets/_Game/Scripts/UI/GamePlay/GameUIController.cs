@@ -70,11 +70,13 @@ public class GameUIController : MonoBehaviour
 
     private void SceneReset()
     {
+        GameManager.Instance.StartGame();
         StartCoroutine(SceneLoad("Office_1"));   
     }
 
     private void SceneQuit()
     {
+        GameManager.Instance.StartGame();
         StartCoroutine(SceneLoad("Menu"));   
     }
 
@@ -87,11 +89,13 @@ public class GameUIController : MonoBehaviour
 
     private void OpenOptions()
     {
+        GameManager.Instance.PauseGame();
         _menuPauseOverlay.RemoveFromClassList("oculto");
     }
 
     private void CloseOptions()
     {
+        GameManager.Instance.StartGame();
         _menuPauseOverlay.AddToClassList("oculto");
     }
 
