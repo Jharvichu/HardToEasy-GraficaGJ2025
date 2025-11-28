@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
     private Button _btnPlay, _btnOptions, _btnCredits, _btnQuit; // Menu
     private Button _btnBack;
     private VisualElement _optionsWindow, _fadeOverlay;
+    private Slider _volumenSlider;
 
     [SerializeField] private float _transitionTime;
 
@@ -20,6 +21,12 @@ public class MainMenuController : MonoBehaviour
     void Start()
     {
         GameManager.Instance.InitializeGame();
+        AudioManager.Instance.PlayBGM("Musica Menu");
+        
+        if (_volumenSlider != null)
+        {
+            _volumenSlider.value = AudioManager.Instance.GetGeneralVolume() * 100f; 
+        }
     }
 
     void OnEnable()
@@ -42,6 +49,7 @@ public class MainMenuController : MonoBehaviour
         _btnQuit    = root.Q<Button>("BtnSalir");
 
         _optionsWindow = root.Q<VisualElement>("PantallaOpciones");
+        _volumenSlider = root.Q<Slider>("SliderVolumen");
         _btnBack = root.Q<Button>("BtnVolver");
 
         _fadeOverlay = root.Q<VisualElement>("Cortina");
@@ -56,6 +64,8 @@ public class MainMenuController : MonoBehaviour
         _btnCredits.clicked += ShowCredits;
         _btnQuit.clicked += QuitGame;
         _btnBack.clicked += ReturnToMenu;
+
+        if (_volumenSlider != null) _volumenSlider.RegisterValueChangedCallback(OnVolumeChanged);
     }
 
     private void UnregisterEvents()
@@ -65,10 +75,13 @@ public class MainMenuController : MonoBehaviour
         if (_btnCredits != null) _btnCredits.clicked -= ShowCredits;
         if (_btnQuit != null) _btnQuit.clicked -= QuitGame;
         if (_btnBack != null) _btnBack.clicked -= ReturnToMenu;
+
+        if (_volumenSlider != null) _volumenSlider.UnregisterValueChangedCallback(OnVolumeChanged);
     }
 
     private void StartGame()
     {
+        AudioManager.Instance.Play("Boton");
         GameManager.Instance.StartGame();
         StartCoroutine(SceneLoad("Office_1"));
     }
@@ -77,17 +90,19 @@ public class MainMenuController : MonoBehaviour
     {
         if (_fadeOverlay != null) _fadeOverlay.AddToClassList("cortina-cerrada");
         yield return new WaitForSeconds(_transitionTime);
+        AudioManager.Instance.StopBGM();
         SceneManager.LoadScene(nameScene);
     }
 
     private void OpenOptions()
     {
+        AudioManager.Instance.Play("Boton");
         _optionsWindow.RemoveFromClassList("oculto");
     }
 
     private void ShowCredits()
     {
-        
+        AudioManager.Instance.Play("Boton");
     }
 
     private void QuitGame()
@@ -97,7 +112,15 @@ public class MainMenuController : MonoBehaviour
 
     private void ReturnToMenu()
     {
+        AudioManager.Instance.Play("Boton");
         _optionsWindow.AddToClassList("oculto");
     }
 
+    private void OnVolumeChanged(ChangeEvent<float> evt)
+    {
+        float valueSlider = evt.newValue;
+        float volumenNormalizado = valueSlider / 100f;
+
+        AudioManager.Instance.UpdateGeneralVolume(volumenNormalizado);
+    }
 }
