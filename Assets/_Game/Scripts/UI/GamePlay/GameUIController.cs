@@ -11,10 +11,10 @@ public class GameUIController : MonoBehaviour
     private ProgressBar _progressBar;
     private VisualElement _imgPlayer;
 
-    private Button _btnPause;
-    private VisualElement _menuPauseOverlay, _menuVictoryOverlay, _menuDefeatOverlay, _fadeOverlay;
-    private Button _btnContinue, _btnReset, _btnQuit, _btnRestartWin, _btnMenuWin, _btnRestartLose, _btnMenuLose;
+    private Button _btnPause, _btnContinue, _btnReset, _btnQuit;
     private Slider _volumenSlider;
+    private VisualElement _menuPauseOverlay, _menuVictoryOverlay, _menuDefeatOverlay, _fadeOverlay;
+    private Button _btnRestartWin, _btnMenuWin, _btnRestartLose, _btnMenuLose;
 
     [Header("Settings")]
     [SerializeField] private PlayerController _playerController;
@@ -81,21 +81,23 @@ public class GameUIController : MonoBehaviour
         _btnReset.clicked += SceneReset;
         _btnQuit.clicked += SceneQuit;
 
-        if (_volumenSlider != null) 
-        {
-            _volumenSlider.value = AudioManager.Instance.GetGeneralVolume();
-            _volumenSlider.RegisterValueChangedCallback(OnVolumeChanged);
-        }
-
         _btnRestartWin.clicked += SceneReset;
         _btnMenuWin.clicked += SceneQuit;
 
         _btnRestartLose.clicked += SceneReset;
         _btnMenuLose.clicked += SceneQuit;
 
+        if (_volumenSlider != null) 
+        {
+            _volumenSlider.value = AudioManager.Instance.GetGeneralVolume();
+            _volumenSlider.RegisterValueChangedCallback(OnVolumeChanged);
+        }
+
+        UpdatePlayerVisuals(_playerController.CurrentState);
+
         ScoreManager.Instance.OnScoreChanged += UpdateProgressBar;
         _playerController.OnPlayerStateChanged += UpdatePlayerVisuals;
-        UpdatePlayerVisuals(_playerController.CurrentState);
+        _playerController.OnPlayerStateChanged += UpdateMusicPlayerState;
     }
 
     private void UnregisterEvents()
@@ -109,6 +111,7 @@ public class GameUIController : MonoBehaviour
 
         ScoreManager.Instance.OnScoreChanged -= UpdateProgressBar;
         _playerController.OnPlayerStateChanged -= UpdatePlayerVisuals;
+        _playerController.OnPlayerStateChanged -= UpdateMusicPlayerState;
     }
 
     private void SceneReset()
@@ -158,12 +161,16 @@ public class GameUIController : MonoBehaviour
     public void ShowDefeatScreen()
     {
         GameManager.Instance.PauseGame();
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.Play("Perdio");
         _menuDefeatOverlay?.RemoveFromClassList("oculto");
     }
 
     public void ShowVictoryScreen()
     {
         GameManager.Instance.PauseGame();
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.Play("Gano");
         _menuVictoryOverlay?.RemoveFromClassList("oculto");
     }
 
@@ -196,6 +203,12 @@ public class GameUIController : MonoBehaviour
                 ? new StyleColor(Color.green) 
                 : new StyleColor(Color.magenta); 
         }
+    }
+
+    private void UpdateMusicPlayerState(PlayerState newState)
+    {
+        if (newState == PlayerState.Asleep) AudioManager.Instance.UpdateBGMusic("Gameplay dormido");
+        if (newState == PlayerState.Awaken) AudioManager.Instance.UpdateBGMusic("Gameplay despierto");
     }
 
 }

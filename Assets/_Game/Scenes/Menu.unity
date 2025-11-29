@@ -1424,6 +1424,16 @@ MonoBehaviour:
     volume: 0.75
     pitch: 1
     loop: 0
+  - name: Perdio
+    clip: {fileID: 8300000, guid: f283dcef6461f6b41ab9bbef9ca85658, type: 3}
+    volume: 0.65
+    pitch: 1
+    loop: 0
+  - name: Gano
+    clip: {fileID: 8300000, guid: 4c41320bf1aac4e40b5c0d581326a194, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
   activeEmitters: []
 --- !u!82 &1449916771
 AudioSource:
@@ -1531,7 +1541,7 @@ Transform:
   m_GameObject: {fileID: 1449916769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5365, y: -1.42592, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2168,3 +2178,4 @@ SceneRoots:
   - {fileID: 766387022}
   - {fileID: 2030670862}
   - {fileID: 625335033}
+  - {fileID: 1449916772}
