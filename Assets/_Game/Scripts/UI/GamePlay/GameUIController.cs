@@ -16,7 +16,6 @@ public class GameUIController : MonoBehaviour
     private Button _btnContinue, _btnReset, _btnQuit, _btnRestartWin, _btnMenuWin, _btnRestartLose, _btnMenuLose;
     private Slider _volumenSlider;
 
-
     [Header("Settings")]
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private float _transitionTime;
