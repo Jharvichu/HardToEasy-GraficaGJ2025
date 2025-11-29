@@ -23,12 +23,41 @@ public class MinijuegoEngrapadora : MiniJuegoBase
     private int hojasEngrapadas = 0;
     private List<HojaEngrapable> hojasActivas = new List<HojaEngrapable>();
     private RectTransform engrapadoraRect;
+    private PlayerController playerController;
 
     void Awake()
     {
-        PlayerController player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if (player.CurrentState == PlayerState.Awaken) dificultad = DificultadMiniJuego.Dificil;
-        if (player.CurrentState == PlayerState.Asleep) dificultad = DificultadMiniJuego.Facil;
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        if (playerController.CurrentState == PlayerState.Awaken) dificultad = DificultadMiniJuego.Dificil;
+        if (playerController.CurrentState == PlayerState.Asleep) dificultad = DificultadMiniJuego.Facil;
+
+        playerController.OnPlayerStateChanged += OnPlayerStateChanged;
+    }
+
+    void OnDestroy()
+    {
+        if (playerController != null)
+        {
+            playerController.OnPlayerStateChanged -= OnPlayerStateChanged;
+        }
+    }
+
+    void OnPlayerStateChanged(PlayerState nuevoEstado)
+    {
+        // Actualizar dificultad según el nuevo estado
+        dificultad = nuevoEstado == PlayerState.Awaken ? DificultadMiniJuego.Dificil : DificultadMiniJuego.Facil;
+
+        // Calcular nueva velocidad
+        float nuevaVelocidad = dificultad == DificultadMiniJuego.Facil ? velocidadFacil : velocidadDificil;
+
+        // Actualizar velocidad de todas las hojas activas
+        foreach (HojaEngrapable hoja in hojasActivas)
+        {
+            if (hoja != null)
+            {
+                hoja.SetVelocidad(nuevaVelocidad);
+            }
+        }
     }
 
     void Start()

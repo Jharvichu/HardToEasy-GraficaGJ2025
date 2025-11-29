@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+[RequireComponent(typeof(UIDocument))]
 public class GameUIController : MonoBehaviour
 {
     private UIDocument _doc;
@@ -114,7 +115,7 @@ public class GameUIController : MonoBehaviour
         if( _btnReset != null ) _btnReset.clicked -= SceneReset;
         if( _btnQuit != null ) _btnQuit.clicked -= SceneQuit;
 
-        if (_volumenSlider != null) _volumenSlider.UnregisterValueChangedCallback(OnVolumeChanged);
+        _volumenSlider?.UnregisterValueChangedCallback(OnVolumeChanged);
 
         ScoreManager.Instance.OnScoreChanged -= UpdateProgressBar;
         _playerController.OnPlayerStateChanged -= UpdatePlayerVisuals;

@@ -107,4 +107,9 @@ public class HojaEngrapable : MonoBehaviour, IPointerClickHandler
     {
         return engrapada;
     }
+
+    public void SetVelocidad(float nuevaVelocidad)
+    {
+        velocidad = nuevaVelocidad;
+    }
 }
