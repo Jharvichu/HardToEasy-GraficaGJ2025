@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SetupClips();
+			m_backgroundAudioSource = GetComponent<AudioSource>();
         }
         else
         {
@@ -37,7 +38,7 @@ public class AudioManager : MonoBehaviour
     }
 
     private void Start() {
-		m_backgroundAudioSource = GetComponent<AudioSource>();
+		//m_backgroundAudioSource = GetComponent<AudioSource>();
 	}
 
     private void SetupClips() {
