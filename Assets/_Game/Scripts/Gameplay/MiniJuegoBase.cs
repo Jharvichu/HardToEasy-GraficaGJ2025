@@ -44,18 +44,18 @@ public class MiniJuegoBase : MonoBehaviour
         Debug.Log("Minijuego iniciado: " + nombreMinijuego);
     }
 
-    public virtual void TerminarMinijuego(bool exito)
+    public virtual void TerminarMinijuego(bool exito, int score)
     {
         minijuegoActivo = false;
-        gameObject.SetActive(false);
-
+        ScoreManager.Instance.AddScore(score);
         OnMinijuegoTerminado?.Invoke(exito);
+        Destroy(gameObject);
     }
 
     public void CerrarMiniJuego()
     {
         Debug.Log("Juego cerrado");
-        TerminarMinijuego(false);
+        TerminarMinijuego(false, 0);
     }
 
     void Update()

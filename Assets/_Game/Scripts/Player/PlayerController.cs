@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Current State")]
     [SerializeField] private PlayerState currentState = PlayerState.Awaken;
+    public PlayerState CurrentState => currentState;
     
     public event Action<PlayerState> OnPlayerStateChanged;
     public event Action OnInteractionPerformed;
@@ -106,17 +107,10 @@ public class PlayerController : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
         
-        Debug.Log(mousePosition);
-
         if (hit.collider != null)
         {
-            Debug.Log("Clicking object");
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             clickable?.OnClick();
-        }
-        else
-        {
-            Debug.Log("No object clicked");
         }
     }
 }

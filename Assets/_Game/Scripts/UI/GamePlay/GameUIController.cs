@@ -11,12 +11,19 @@ public class GameUIController : MonoBehaviour
     private ProgressBar _progressBar;
     private VisualElement _imgPlayer;
 
-    private Button _btnPause;
-    private VisualElement _menuPauseOverlay, _fadeOverlay;
-    private Button _btnContinue, _btnReset, _btnQuit;
+    private Button _btnPause, _btnContinue, _btnReset, _btnQuit;
     private Slider _volumenSlider;
+    private VisualElement _menuPauseOverlay, _menuVictoryOverlay, _menuDefeatOverlay, _fadeOverlay;
+    private Button _btnRestartWin, _btnMenuWin, _btnRestartLose, _btnMenuLose;
 
+    [Header("Settings")]
+    [SerializeField] private PlayerController _playerController;
     [SerializeField] private float _transitionTime;
+    [SerializeField] private int maxScore = 100;
+
+    [Header("Player Visuals")]
+    [SerializeField] private Sprite iconAwake;
+    [SerializeField] private Sprite iconSleep;
 
     void Awake()
     {
@@ -54,6 +61,14 @@ public class GameUIController : MonoBehaviour
         _btnReset = root.Q<Button>("BtnReiniciar");
         _btnQuit = root.Q<Button>("BtnSalirMenu");
 
+        _menuVictoryOverlay = root.Q<VisualElement>("MenuVictoria");
+        _btnRestartWin = root.Q<Button>("BtnSiguienteNivel");
+        _btnMenuWin = root.Q<Button>("BtnMenuVictoria");
+
+        _menuDefeatOverlay = root.Q<VisualElement>("MenuDerrota");
+        _btnRestartLose = root.Q<Button>("BtnReiniciarDerrota");
+        _btnMenuLose = root.Q<Button>("BtnMenuDerrota");
+
         _fadeOverlay = root.Q<VisualElement>("Cortina");
     }
 
@@ -66,11 +81,23 @@ public class GameUIController : MonoBehaviour
         _btnReset.clicked += SceneReset;
         _btnQuit.clicked += SceneQuit;
 
+        _btnRestartWin.clicked += SceneReset;
+        _btnMenuWin.clicked += SceneQuit;
+
+        _btnRestartLose.clicked += SceneReset;
+        _btnMenuLose.clicked += SceneQuit;
+
         if (_volumenSlider != null) 
         {
             _volumenSlider.value = AudioManager.Instance.GetGeneralVolume();
             _volumenSlider.RegisterValueChangedCallback(OnVolumeChanged);
         }
+
+        UpdatePlayerVisuals(_playerController.CurrentState);
+
+        ScoreManager.Instance.OnScoreChanged += UpdateProgressBar;
+        _playerController.OnPlayerStateChanged += UpdatePlayerVisuals;
+        _playerController.OnPlayerStateChanged += UpdateMusicPlayerState;
     }
 
     private void UnregisterEvents()
@@ -81,6 +108,10 @@ public class GameUIController : MonoBehaviour
         if( _btnQuit != null ) _btnQuit.clicked -= SceneQuit;
 
         if (_volumenSlider != null) _volumenSlider.UnregisterValueChangedCallback(OnVolumeChanged);
+
+        ScoreManager.Instance.OnScoreChanged -= UpdateProgressBar;
+        _playerController.OnPlayerStateChanged -= UpdatePlayerVisuals;
+        _playerController.OnPlayerStateChanged -= UpdateMusicPlayerState;
     }
 
     private void SceneReset()
@@ -126,4 +157,58 @@ public class GameUIController : MonoBehaviour
 
         AudioManager.Instance.UpdateGeneralVolume(volumenNormalizado);
     }
+
+    public void ShowDefeatScreen()
+    {
+        GameManager.Instance.PauseGame();
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.Play("Perdio");
+        _menuDefeatOverlay?.RemoveFromClassList("oculto");
+    }
+
+    public void ShowVictoryScreen()
+    {
+        GameManager.Instance.PauseGame();
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.Play("Gano");
+        _menuVictoryOverlay?.RemoveFromClassList("oculto");
+    }
+
+    private void UpdateProgressBar(int newScore)
+    {
+        if (_progressBar != null)
+        {
+            _progressBar.value = newScore;
+            _progressBar.title = $"Puntaje: {newScore}";
+        }
+
+        if (newScore >= maxScore) ShowVictoryScreen();
+    }
+
+    private void UpdatePlayerVisuals(PlayerState newState)
+    {
+        Sprite spriteToUse = (newState == PlayerState.Awaken) ? iconAwake : iconSleep;
+        string textToUse = (newState == PlayerState.Awaken) ? "DESPIERTO" : "DORMIDO";
+
+        if (_imgPlayer != null && spriteToUse != null)
+        {
+            _imgPlayer.style.backgroundImage = new StyleBackground(spriteToUse);
+        }
+
+        if (_txtState != null)
+        {
+            _txtState.text = textToUse;
+
+            _txtState.style.color = (newState == PlayerState.Awaken) 
+                ? new StyleColor(Color.green) 
+                : new StyleColor(Color.magenta); 
+        }
+    }
+
+    private void UpdateMusicPlayerState(PlayerState newState)
+    {
+        if (newState == PlayerState.Asleep) AudioManager.Instance.UpdateBGMusic("Gameplay dormido");
+        if (newState == PlayerState.Awaken) AudioManager.Instance.UpdateBGMusic("Gameplay despierto");
+    }
+
 }

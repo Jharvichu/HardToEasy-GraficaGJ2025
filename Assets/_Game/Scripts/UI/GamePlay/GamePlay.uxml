@@ -7,7 +7,7 @@
         </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore" name="VisualElement" class="bottom-container">
             <ui:VisualElement class="stats-group">
-                <ui:VisualElement name="Imagen Player" class="marco-retrato" style="margin-right: 10px; margin-top: 0; background-color: rgba(60, 60, 65, 0); -unity-background-image-tint-color: rgb(255, 255, 255); background-image: url(&quot;project://database/Assets/_Game/Art/Sprites/UI/Perfil%20Dormido.png?fileID=21300000&amp;guid=22562799db1b15e47b1c4be0c51380cf&amp;type=3#Perfil Dormido&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-size: 333% 202%;" />
+                <ui:VisualElement name="Imagen Player" class="marco-retrato" style="margin-right: 10px; margin-top: 0; background-color: rgba(60, 60, 65, 0); -unity-background-image-tint-color: rgb(255, 255, 255); background-image: url(&quot;project://database/Assets/_Game/Art/Sprites/UI/Perfil%20Despierto.png?fileID=21300000&amp;guid=28adc90a5483f604eadd7bdd3000c94f&amp;type=3#Perfil Despierto&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-size: 333% 202%;" />
                 <ui:VisualElement name="Informacion" class="info-columna">
                     <ui:VisualElement style="flex-direction: row; align-items: center;">
                         <ui:Label text="ESTADO: " class="etiqueta-pequena" />
@@ -15,13 +15,12 @@
                     </ui:VisualElement>
                     <ui:VisualElement class="barra-contenedor">
                         <ui:VisualElement name="IconoBarra" class="icono-barra" />
-                        <ui:ProgressBar name="BarraProgreso" low-value="0" high-value="100" value="75" class="barra-retro" />
+                        <ui:ProgressBar name="BarraProgreso" low-value="0" high-value="100" value="0" class="barra-retro" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-
     <ui:VisualElement name="MenuPausa" class="overlay oculto">
         <ui:VisualElement class="panel-pausa">
             <ui:Label text="PAUSA" class="titulo-pausa" />
@@ -39,7 +38,36 @@
             <ui:Button text="SALIR AL MENU" name="BtnSalirMenu" class="boton-menu-rojo" style="margin-top: 20px;" />
         </ui:VisualElement>
     </ui:VisualElement>
+<ui:VisualElement name="MenuVictoria" class="overlay oculto">
+        <ui:VisualElement class="panel-pausa">
+            <ui:VisualElement class="encabezado-resultado">
+                <ui:VisualElement name="ImgVictoria" class="imagen-resultado" style="background-image: url('project://database/Assets/_Game/Art/Sprites/UI/IconoVictoria.png');" />
+                <ui:Label text="¡ASCENDIDO!" class="titulo-pausa texto-victoria" />
+            </ui:VisualElement>
+            
+            <ui:Label text="¡Nivel Completado!" class="subtitulo-resultado" />
+            
+            <ui:VisualElement style="height: 2px; background-color: rgb(45, 35, 35); width: 90%; margin-top: 10px; margin-bottom: 20px;" />
+            
+            <ui:Button text="SIGUIENTE NIVEL" name="BtnSiguienteNivel" class="boton-menu" />
+            <ui:Button text="MENU PRINCIPAL" name="BtnMenuVictoria" class="boton-menu-rojo" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 
-    <ui:VisualElement name="Cortina" class="cortina" picking-mode="Ignore" />
+    <ui:VisualElement name="MenuDerrota" class="overlay oculto">
+        <ui:VisualElement class="panel-pausa">
+            <ui:VisualElement class="encabezado-resultado">
+                <ui:VisualElement name="ImgDerrota" class="imagen-resultado" style="background-image: url('project://database/Assets/_Game/Art/Sprites/UI/IconoDerrota.png');" />
+                <ui:Label text="DESPEDIDO" class="titulo-pausa texto-derrota" />
+            </ui:VisualElement>
+            
+            <ui:Label text="Te atraparon durmiendo..." class="subtitulo-resultado" />
 
+            <ui:VisualElement style="height: 2px; background-color: rgb(45, 35, 35); width: 90%; margin-top: 10px; margin-bottom: 20px;" />
+            
+            <ui:Button text="REINICIAR" name="BtnReiniciarDerrota" class="boton-menu" />
+            <ui:Button text="MENU PRINCIPAL" name="BtnMenuDerrota" class="boton-menu-rojo" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Cortina" picking-mode="Ignore" class="cortina" />
 </ui:UXML>

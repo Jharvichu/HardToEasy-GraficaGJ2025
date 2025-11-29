@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -18,7 +18,9 @@ public class MinijuegoPortafolios : MiniJuegoBase
 
     void Awake()
     {
-        // Componente inicializado
+        PlayerController player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        if (player.CurrentState == PlayerState.Awaken) dificultad = DificultadMiniJuego.Dificil;
+        if (player.CurrentState == PlayerState.Asleep) dificultad = DificultadMiniJuego.Facil;
     }
 
     void Start()
@@ -257,7 +259,7 @@ public class MinijuegoPortafolios : MiniJuegoBase
         if (ordenCorrectoCompleto && zonasCorrectas == ordenCorrecto.Count)
         {
             Debug.Log("Juego completado correctamente");
-            TerminarMinijuego(true);
+            TerminarMinijuego(true, 10);
         }
     }
 
