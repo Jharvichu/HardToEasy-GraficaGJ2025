@@ -25,6 +25,12 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private Sprite iconAwake;
     [SerializeField] private Sprite iconSleep;
 
+    [Header("Bosses")]
+    [SerializeField] private BossController _boss1;
+    [SerializeField] private BossController _boss2;
+    [SerializeField] private BossController _boss3;
+    [SerializeField] private BossController _boss4;
+
     void Awake()
     {
         _doc = GetComponent<UIDocument>();
@@ -98,6 +104,7 @@ public class GameUIController : MonoBehaviour
         ScoreManager.Instance.OnScoreChanged += UpdateProgressBar;
         _playerController.OnPlayerStateChanged += UpdatePlayerVisuals;
         _playerController.OnPlayerStateChanged += UpdateMusicPlayerState;
+        RegisterEventsBoss();
     }
 
     private void UnregisterEvents()
@@ -112,6 +119,23 @@ public class GameUIController : MonoBehaviour
         ScoreManager.Instance.OnScoreChanged -= UpdateProgressBar;
         _playerController.OnPlayerStateChanged -= UpdatePlayerVisuals;
         _playerController.OnPlayerStateChanged -= UpdateMusicPlayerState;
+        UnregisterEventsBoss();
+    }
+
+    private void RegisterEventsBoss()
+    {
+        _boss1.OnBossCaughtPlayer += ShowDefeatScreen;
+        _boss2.OnBossCaughtPlayer += ShowDefeatScreen;
+        _boss3.OnBossCaughtPlayer += ShowDefeatScreen;
+        _boss4.OnBossCaughtPlayer += ShowDefeatScreen;
+    }
+
+    private void UnregisterEventsBoss()
+    {
+        _boss1.OnBossCaughtPlayer -= ShowDefeatScreen;
+        _boss2.OnBossCaughtPlayer -= ShowDefeatScreen;
+        _boss3.OnBossCaughtPlayer -= ShowDefeatScreen;
+        _boss4.OnBossCaughtPlayer -= ShowDefeatScreen;
     }
 
     private void SceneReset()
