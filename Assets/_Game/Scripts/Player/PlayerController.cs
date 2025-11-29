@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Current State")]
     [SerializeField] private PlayerState currentState = PlayerState.Awaken;
+    public PlayerState CurrentState => currentState;
     
     public event Action<PlayerState> OnPlayerStateChanged;
     public event Action OnInteractionPerformed;

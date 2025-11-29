@@ -253,3 +253,43 @@
     border-width: 2px;
     -unity-background-image-tint-color: rgb(239, 234, 207);
 }
+
+/* --- ESTILOS NUEVOS PARA RESULTADOS --- */
+
+.encabezado-resultado {
+    flex-direction: row;        /* Pone la imagen al lado del texto */
+    align-items: center;        /* Los centra verticalmente */
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.imagen-resultado {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;         /* Espacio entre imagen y texto */
+    background-color: rgba(0,0,0,0.2);
+    border-width: 4px;
+    border-color: rgb(239, 234, 207);
+    /* Asegúrate de que la imagen se ajuste bien */
+    -unity-background-scale-mode: scale-to-fit; 
+}
+
+.texto-victoria {
+    color: rgb(85, 255, 85);    /* Verde brillante */
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+    margin-bottom: 0;           /* Quitamos margen para alinear bien */
+}
+
+.texto-derrota {
+    color: rgb(255, 80, 80);    /* Rojo alarma */
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+    margin-bottom: 0;
+}
+
+.subtitulo-resultado {
+    font-size: 20px;
+    color: rgb(200, 200, 200);
+    margin-bottom: 10px;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}

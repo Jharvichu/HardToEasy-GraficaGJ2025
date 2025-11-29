@@ -26,7 +26,9 @@ public class MinijuegoEngrapadora : MiniJuegoBase
 
     void Awake()
     {
-        // Componente inicializado
+        PlayerController player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        if (player.CurrentState == PlayerState.Awaken) dificultad = DificultadMiniJuego.Dificil;
+        if (player.CurrentState == PlayerState.Asleep) dificultad = DificultadMiniJuego.Facil;
     }
 
     void Start()
@@ -156,7 +158,7 @@ public class MinijuegoEngrapadora : MiniJuegoBase
             {
                 // Juego completado
                 Debug.Log($"Juego completado correctamente - Puntuacion final: {puntos}");
-                TerminarMinijuego(true);
+                TerminarMinijuego(true, 10);
             }
         }
         else
@@ -178,7 +180,7 @@ public class MinijuegoEngrapadora : MiniJuegoBase
             {
                 // Juego completado sin puntos
                 Debug.Log($"Juego completado - Puntuacion final: {puntos}");
-                TerminarMinijuego(false);
+                TerminarMinijuego(false, 0);
             }
         }
     }
