@@ -60,13 +60,29 @@
                 <ui:VisualElement name="ImgDerrota" class="imagen-resultado" style="background-image: url('project://database/Assets/_Game/Art/Sprites/UI/IconoDerrota.png');" />
                 <ui:Label text="DESPEDIDO" class="titulo-pausa texto-derrota" />
             </ui:VisualElement>
-            
+
             <ui:Label text="Te atraparon durmiendo..." class="subtitulo-resultado" />
 
             <ui:VisualElement style="height: 2px; background-color: rgb(45, 35, 35); width: 90%; margin-top: 10px; margin-bottom: 20px;" />
-            
+
             <ui:Button text="REINICIAR" name="BtnReiniciarDerrota" class="boton-menu" />
             <ui:Button text="MENU PRINCIPAL" name="BtnMenuDerrota" class="boton-menu-rojo" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+    <ui:VisualElement name="MenuDerrotaTiempo" class="overlay oculto">
+        <ui:VisualElement class="panel-pausa">
+            <ui:VisualElement class="encabezado-resultado">
+                <ui:VisualElement name="ImgDerrotaTiempo" class="imagen-resultado" style="background-image: url('project://database/Assets/_Game/Art/Sprites/UI/IconoDerrota.png');" />
+                <ui:Label text="DESPEDIDO" class="titulo-pausa texto-derrota" />
+            </ui:VisualElement>
+
+            <ui:Label text="No acabaste tus tareas..." class="subtitulo-resultado" />
+
+            <ui:VisualElement style="height: 2px; background-color: rgb(45, 35, 35); width: 90%; margin-top: 10px; margin-bottom: 20px;" />
+
+            <ui:Button text="REINICIAR" name="BtnReiniciarTiempo" class="boton-menu" />
+            <ui:Button text="MENU PRINCIPAL" name="BtnMenuTiempo" class="boton-menu-rojo" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="Cortina" picking-mode="Ignore" class="cortina" />

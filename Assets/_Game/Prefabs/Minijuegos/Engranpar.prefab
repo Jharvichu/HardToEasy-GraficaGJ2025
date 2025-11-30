@@ -337,10 +337,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8165974481429595990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.5, y: 0}
-  m_SizeDelta: {x: -143, y: -102}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 92.5, y: -56}
+  m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &873922952302599795
 CanvasRenderer:
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 3599387949407312928}
+  rangoMovimiento: 150
 --- !u!1 &5527748092806136416
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 711958390224952557}
+  rangoMovimiento: 150
 --- !u!1 &6184911154663868476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -754716863531390863, guid: c7f4d410194aeca46b223a85505a85a3, type: 3}
+  m_Sprite: {fileID: 7891473625080699278, guid: 6649cfc0586f8484184fd54a7de396a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1265,6 +1267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 1586281048949204493}
+  rangoMovimiento: 150
 --- !u!1 &8347179883511442892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 3162589070830020802}
+  rangoMovimiento: 150
 --- !u!1 &8637125531703196156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 875923896382138926, guid: f5fadcb97b2458949877db43a824e06a, type: 3}
+  m_Sprite: {fileID: -3851250379050145762, guid: 40839dffe42b6784e9248a6b65320f8b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1445,6 +1449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 5676815906578214623}
+  rangoMovimiento: 150
 --- !u!1 &8648131914442348968
 GameObject:
   m_ObjectHideFlags: 0

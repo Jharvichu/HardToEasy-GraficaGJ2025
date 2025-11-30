@@ -35,6 +35,7 @@ public class HojaEngrapable : MonoBehaviour, IPointerClickHandler
                 zonaEngrapado = zona.gameObject;
             }
         }
+
     }
 
     void Update()
@@ -43,11 +44,11 @@ public class HojaEngrapable : MonoBehaviour, IPointerClickHandler
 
         // Mover hoja arriba y abajo
         float movimiento = velocidad * Time.deltaTime;
-        
+
         if (moviendoArriba)
         {
             rectTransform.anchoredPosition += new Vector2(0, movimiento);
-            
+
             // Verificar limite superior
             if (rectTransform.anchoredPosition.y >= areaMovimiento.rect.height / 2)
             {
@@ -57,7 +58,7 @@ public class HojaEngrapable : MonoBehaviour, IPointerClickHandler
         else
         {
             rectTransform.anchoredPosition -= new Vector2(0, movimiento);
-            
+
             // Verificar limite inferior
             if (rectTransform.anchoredPosition.y <= -areaMovimiento.rect.height / 2)
             {
