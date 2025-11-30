@@ -22,10 +22,10 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private float _transitionTime;
     [SerializeField] private int maxScore = 100;
 
-    // Cronómetro del juego (9:00 AM → 10:00 AM)
+    // Cronómetro del juego (9:00 AM → 5:00 PM)
     private float _gameTimeInSeconds = 0f;
-    private const float TOTAL_GAME_DURATION = 3600f;  // 1 hora de juego = 3600 segundos
-    private const float REAL_TIME_DURATION = 300f;    // 5 minutos reales = 300 segundos
+    private const float TOTAL_GAME_DURATION = 28800f;  // 8 horas de juegos = 28800 segundos
+    private const float REAL_TIME_DURATION = 120f;    // 2 minutos reales = 120 segundos
     private float _timeScale;
     private bool _timerRunning = false;
 
