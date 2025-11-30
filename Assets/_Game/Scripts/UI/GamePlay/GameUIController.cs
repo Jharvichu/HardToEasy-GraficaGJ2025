@@ -192,6 +192,7 @@ public class GameUIController : MonoBehaviour
         if (_fadeOverlay != null) _fadeOverlay.AddToClassList("cortina-cerrada");
         yield return new WaitForSeconds(_transitionTime);
         AudioManager.Instance.StopBGM();
+        ScoreManager.Instance.ResetScore();
         SceneManager.LoadScene(nameScene);
     }
 
@@ -220,6 +221,7 @@ public class GameUIController : MonoBehaviour
     public void ShowDefeatScreen()
     {
         GameManager.Instance.PauseGame();
+        ScoreManager.Instance.ResetScore();
         AudioManager.Instance.StopBGM();
         AudioManager.Instance.Play("Perdio");
         _menuDefeatOverlay?.RemoveFromClassList("oculto");
@@ -228,6 +230,7 @@ public class GameUIController : MonoBehaviour
     public void ShowTimeExpiredDefeat()
     {
         GameManager.Instance.PauseGame();
+        ScoreManager.Instance.ResetScore();
         AudioManager.Instance.StopBGM();
         AudioManager.Instance.Play("Perdio");
         _menuDefeatTimeOverlay?.RemoveFromClassList("oculto");
@@ -236,6 +239,7 @@ public class GameUIController : MonoBehaviour
     public void ShowVictoryScreen()
     {
         GameManager.Instance.PauseGame();
+        ScoreManager.Instance.ResetScore();
         AudioManager.Instance.StopBGM();
         AudioManager.Instance.Play("Gano");
         _menuVictoryOverlay?.RemoveFromClassList("oculto");
