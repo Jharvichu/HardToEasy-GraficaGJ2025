@@ -1,0 +1,79 @@
+/* Fondo de toda la pantalla */
+.pantalla-negra {
+    flex-grow: 1;
+    background-color: rgb(0, 0, 0); /* Negro cine */
+    align-items: center;
+    overflow: hidden; /* Importante: lo que se salga de la pantalla no se dibuja */
+}
+
+/* El contenedor largo con todo el texto */
+.columna-creditos {
+    position: absolute; /* Para poder moverlo libremente */
+    top: 100%; /* Empieza justo debajo de la pantalla */
+    width: 100%;
+    align-items: center;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+/* Título principal del juego */
+.titulo-juego {
+    font-size: 80px;
+    color: rgb(239, 234, 207); /* Tu color beige */
+    margin-bottom: 50px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.espacio-grande {
+    height: 100px;
+}
+
+.bloque-credito {
+    margin-bottom: 80px; /* Mucho espacio entre secciones */
+    align-items: center;
+}
+
+.rol-texto {
+    font-size: 30px;
+    color: rgb(150, 150, 150); /* Gris para el rol */
+    margin-bottom: 15px;
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.nombre-texto {
+    font-size: 40px;
+    color: white; /* Blanco brillante para nombres */
+    margin-bottom: 10px;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.mensaje-final {
+    font-size: 50px;
+    color: rgb(239, 234, 207);
+    margin-top: 200px;
+    margin-bottom: 500px; /* Espacio extra al final para que suba todo */
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+/* Botón pequeño en la esquina inferior derecha */
+.boton-salir-fijo {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 150px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0); /* Transparente */
+    border-color: rgb(239, 234, 207);
+    border-width: 2px;
+    color: rgb(239, 234, 207);
+    font-size: 20px;
+    -unity-font-definition: url("project://database/Assets/_Game/Art/Fonts/Minecraft.ttf?fileID=12800000&guid=5bf18ccaf7a4015498f0f4f1adbfc804&type=3#Minecraft");
+}
+
+.boton-salir-fijo:hover {
+    background-color: rgb(239, 234, 207);
+    color: black;
+}

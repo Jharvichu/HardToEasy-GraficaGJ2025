@@ -103,6 +103,7 @@ public class MainMenuController : MonoBehaviour
     private void ShowCredits()
     {
         AudioManager.Instance.Play("Boton");
+        StartCoroutine(SceneLoad("Creditos"));
     }
 
     private void QuitGame()
