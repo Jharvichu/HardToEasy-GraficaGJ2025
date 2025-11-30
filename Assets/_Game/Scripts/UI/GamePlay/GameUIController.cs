@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+[RequireComponent(typeof(UIDocument))]
 public class GameUIController : MonoBehaviour
 {
     private UIDocument _doc;
@@ -13,13 +14,20 @@ public class GameUIController : MonoBehaviour
 
     private Button _btnPause, _btnContinue, _btnReset, _btnQuit;
     private Slider _volumenSlider;
-    private VisualElement _menuPauseOverlay, _menuVictoryOverlay, _menuDefeatOverlay, _fadeOverlay;
-    private Button _btnRestartWin, _btnMenuWin, _btnRestartLose, _btnMenuLose;
+    private VisualElement _menuPauseOverlay, _menuVictoryOverlay, _menuDefeatOverlay, _menuDefeatTimeOverlay, _fadeOverlay;
+    private Button _btnRestartWin, _btnMenuWin, _btnRestartLose, _btnMenuLose, _btnRestartTime, _btnMenuTime;
 
     [Header("Settings")]
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private float _transitionTime;
     [SerializeField] private int maxScore = 100;
+
+    // Cronómetro del juego (9:00 AM → 5:00 PM)
+    private float _gameTimeInSeconds = 0f;
+    private const float TOTAL_GAME_DURATION = 28800f;  // 8 horas de juegos = 28800 segundos
+    private const float REAL_TIME_DURATION = 120f;    // 2 minutos reales = 120 segundos
+    private float _timeScale;
+    private bool _timerRunning = false;
 
     [Header("Player Visuals")]
     [SerializeField] private Sprite iconAwake;
@@ -39,6 +47,26 @@ public class GameUIController : MonoBehaviour
     void Start()
     {
         AudioManager.Instance.UpdateBGMusic("Gameplay despierto");
+
+        // Inicializar cronómetro
+        _timeScale = TOTAL_GAME_DURATION / REAL_TIME_DURATION;
+        _timerRunning = true;
+        UpdateTimerUI();
+    }
+
+    void Update()
+    {
+        if (_timerRunning && GameManager.Instance.currentState == GameManager.GameState.Playing)
+        {
+            _gameTimeInSeconds += Time.deltaTime * _timeScale;
+            UpdateTimerUI();
+
+            if (_gameTimeInSeconds >= TOTAL_GAME_DURATION)
+            {
+                _timerRunning = false;
+                ShowTimeExpiredDefeat();
+            }
+        }
     }
 
     void OnEnable()
@@ -75,6 +103,10 @@ public class GameUIController : MonoBehaviour
         _btnRestartLose = root.Q<Button>("BtnReiniciarDerrota");
         _btnMenuLose = root.Q<Button>("BtnMenuDerrota");
 
+        _menuDefeatTimeOverlay = root.Q<VisualElement>("MenuDerrotaTiempo");
+        _btnRestartTime = root.Q<Button>("BtnReiniciarTiempo");
+        _btnMenuTime = root.Q<Button>("BtnMenuTiempo");
+
         _fadeOverlay = root.Q<VisualElement>("Cortina");
     }
 
@@ -92,6 +124,9 @@ public class GameUIController : MonoBehaviour
 
         _btnRestartLose.clicked += SceneReset;
         _btnMenuLose.clicked += SceneQuit;
+
+        _btnRestartTime.clicked += SceneReset;
+        _btnMenuTime.clicked += SceneQuit;
 
         if (_volumenSlider != null) 
         {
@@ -114,7 +149,7 @@ public class GameUIController : MonoBehaviour
         if( _btnReset != null ) _btnReset.clicked -= SceneReset;
         if( _btnQuit != null ) _btnQuit.clicked -= SceneQuit;
 
-        if (_volumenSlider != null) _volumenSlider.UnregisterValueChangedCallback(OnVolumeChanged);
+        _volumenSlider?.UnregisterValueChangedCallback(OnVolumeChanged);
 
         ScoreManager.Instance.OnScoreChanged -= UpdateProgressBar;
         _playerController.OnPlayerStateChanged -= UpdatePlayerVisuals;
@@ -157,6 +192,7 @@ public class GameUIController : MonoBehaviour
         if (_fadeOverlay != null) _fadeOverlay.AddToClassList("cortina-cerrada");
         yield return new WaitForSeconds(_transitionTime);
         AudioManager.Instance.StopBGM();
+        ScoreManager.Instance.ResetScore();
         SceneManager.LoadScene(nameScene);
     }
 
@@ -185,14 +221,25 @@ public class GameUIController : MonoBehaviour
     public void ShowDefeatScreen()
     {
         GameManager.Instance.PauseGame();
+        ScoreManager.Instance.ResetScore();
         AudioManager.Instance.StopBGM();
         AudioManager.Instance.Play("Perdio");
         _menuDefeatOverlay?.RemoveFromClassList("oculto");
     }
 
+    public void ShowTimeExpiredDefeat()
+    {
+        GameManager.Instance.PauseGame();
+        ScoreManager.Instance.ResetScore();
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.Play("Perdio");
+        _menuDefeatTimeOverlay?.RemoveFromClassList("oculto");
+    }
+
     public void ShowVictoryScreen()
     {
         GameManager.Instance.PauseGame();
+        ScoreManager.Instance.ResetScore();
         AudioManager.Instance.StopBGM();
         AudioManager.Instance.Play("Gano");
         _menuVictoryOverlay?.RemoveFromClassList("oculto");
@@ -235,4 +282,16 @@ public class GameUIController : MonoBehaviour
         if (newState == PlayerState.Awaken) AudioManager.Instance.UpdateBGMusic("Gameplay despierto");
     }
 
+    private void UpdateTimerUI()
+    {
+        // Convertir segundos de juego a hora (empezando desde 9:00 AM)
+        int totalMinutes = 9 * 60 + Mathf.FloorToInt(_gameTimeInSeconds / 60f);
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        string ampm = hours >= 12 ? "PM" : "AM";
+        int displayHour = hours > 12 ? hours - 12 : (hours == 0 ? 12 : hours);
+
+        _txtTimer.text = $"{displayHour:D2}:{minutes:D2} {ampm}";
+    }
 }

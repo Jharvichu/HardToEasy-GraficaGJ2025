@@ -17,18 +17,47 @@ public class MinijuegoEngrapadora : MiniJuegoBase
     [Header("Configuración Juego")]
     public float velocidadFacil = 100f;
     public float velocidadDificil = 250f;
-    public float rangoEngrapado = 45f;
+    public float rangoEngrapado = 80f; // Aumentado de 45 para mayor tolerancia
 
-    private int puntos = 0;
+    private int hojasEngrapdasCorrectamente = 0;
     private int hojasEngrapadas = 0;
     private List<HojaEngrapable> hojasActivas = new List<HojaEngrapable>();
     private RectTransform engrapadoraRect;
+    private PlayerController playerController;
 
     void Awake()
     {
-        PlayerController player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if (player.CurrentState == PlayerState.Awaken) dificultad = DificultadMiniJuego.Dificil;
-        if (player.CurrentState == PlayerState.Asleep) dificultad = DificultadMiniJuego.Facil;
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        if (playerController.CurrentState == PlayerState.Awaken) dificultad = DificultadMiniJuego.Dificil;
+        if (playerController.CurrentState == PlayerState.Asleep) dificultad = DificultadMiniJuego.Facil;
+
+        playerController.OnPlayerStateChanged += OnPlayerStateChanged;
+    }
+
+    void OnDestroy()
+    {
+        if (playerController != null)
+        {
+            playerController.OnPlayerStateChanged -= OnPlayerStateChanged;
+        }
+    }
+
+    void OnPlayerStateChanged(PlayerState nuevoEstado)
+    {
+        // Actualizar dificultad según el nuevo estado
+        dificultad = nuevoEstado == PlayerState.Awaken ? DificultadMiniJuego.Dificil : DificultadMiniJuego.Facil;
+
+        // Calcular nueva velocidad
+        float nuevaVelocidad = dificultad == DificultadMiniJuego.Facil ? velocidadFacil : velocidadDificil;
+
+        // Actualizar velocidad de todas las hojas activas
+        foreach (HojaEngrapable hoja in hojasActivas)
+        {
+            if (hoja != null)
+            {
+                hoja.SetVelocidad(nuevaVelocidad);
+            }
+        }
     }
 
     void Start()
@@ -69,7 +98,7 @@ public class MinijuegoEngrapadora : MiniJuegoBase
                     break;
                 }
             }
-            
+
             if (hojaActual != null)
             {
                 Debug.Log($"Click detectado en pantalla - Intentando engrapar {hojaActual.name}");
@@ -88,17 +117,17 @@ public class MinijuegoEngrapadora : MiniJuegoBase
     {
         minijuegoActivo = true;
         gameObject.SetActive(true);
-        
-        puntos = 0;
+
+        hojasEngrapdasCorrectamente = 0;
         hojasEngrapadas = 0;
-        ActualizarPuntos();
-        
+
         if (engrapadoraObject != null)
         {
             engrapadoraRect = engrapadoraObject.GetComponent<RectTransform>();
         }
-        
+
         CrearHojas();
+        ActualizarProgreso(); // Llamar DESPUÉS de CrearHojas para que hojasActivas.Count sea correcto
     }
 
     void CrearHojas()
@@ -141,12 +170,13 @@ public class MinijuegoEngrapadora : MiniJuegoBase
         if (distancia <= rangoEngrapado)
         {
             // Engrapado correcto
-            puntos += 10;
+            hojasEngrapdasCorrectamente++;
             hojasEngrapadas++;
-            Debug.Log($"Hoja {hoja.name} engrapada correctamente - Puntos: +10 - Total: {puntos}");
-            
+            Debug.Log($"Hoja {hoja.name} engrapada correctamente - Progreso: {hojasEngrapdasCorrectamente}/{hojasActivas.Count}");
+
+            AudioManager.Instance.Play("ExitoPerforar");
             hoja.Engrapar(true);
-            ActualizarPuntos();
+            ActualizarProgreso();
             
             // Activar siguiente hoja
             if (hojasEngrapadas < hojasActivas.Count)
@@ -157,7 +187,7 @@ public class MinijuegoEngrapadora : MiniJuegoBase
             else
             {
                 // Juego completado
-                Debug.Log($"Juego completado correctamente - Puntuacion final: {puntos}");
+                Debug.Log($"Juego completado correctamente - Hojas engrapadas: {hojasEngrapdasCorrectamente}/{hojasActivas.Count}");
                 TerminarMinijuego(true, 10);
             }
         }
@@ -166,7 +196,7 @@ public class MinijuegoEngrapadora : MiniJuegoBase
             // Engrapado fallido
             hojasEngrapadas++;
             Debug.Log($"Hoja {hoja.name} engrapada incorrectamente - Demasiado lejos - Oportunidad perdida");
-            
+
             // Desactivar hoja fallida
             hoja.gameObject.SetActive(false);
             
@@ -178,23 +208,18 @@ public class MinijuegoEngrapadora : MiniJuegoBase
             }
             else
             {
-                // Juego completado sin puntos
-                Debug.Log($"Juego completado - Puntuacion final: {puntos}");
+                // Juego completado
+                Debug.Log($"Juego completado - Hojas engrapadas: {hojasEngrapdasCorrectamente}/{hojasActivas.Count}");
                 TerminarMinijuego(false, 0);
             }
         }
     }
 
-    void ActualizarPuntos()
+    void ActualizarProgreso()
     {
         if (textoPuntos != null)
         {
-            textoPuntos.text = puntos.ToString();
-            Debug.Log($"Puntos actualizados en UI: {puntos}");
-        }
-        else
-        {
-            Debug.LogWarning("textoPuntos es NULL - No se asignó en el Inspector");
+            textoPuntos.text = $"{hojasEngrapdasCorrectamente}/{hojasActivas.Count}";
         }
     }
 }

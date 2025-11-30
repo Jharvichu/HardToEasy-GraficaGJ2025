@@ -1426,12 +1426,17 @@ MonoBehaviour:
     loop: 0
   - name: Perdio
     clip: {fileID: 8300000, guid: f283dcef6461f6b41ab9bbef9ca85658, type: 3}
-    volume: 0.65
+    volume: 0.5
     pitch: 1
     loop: 0
   - name: Gano
     clip: {fileID: 8300000, guid: 4c41320bf1aac4e40b5c0d581326a194, type: 3}
     volume: 0.75
+    pitch: 1
+    loop: 0
+  - name: ExitoPerforar
+    clip: {fileID: 8300000, guid: ee9b14a1a5fc541439ff9ab1937bd5b7, type: 3}
+    volume: 0.25
     pitch: 1
     loop: 0
   activeEmitters: []

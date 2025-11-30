@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerData playerData;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Animator animator;
 
     [Header("Current State")]
     [SerializeField] private PlayerState currentState = PlayerState.Awaken;
@@ -36,6 +37,11 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         InitializeState();
+    }
+
+    private void Update()
+    {
+        UpdateAnimations();
     }
 
     private void ValidateDependencies()
@@ -71,11 +77,15 @@ public class PlayerController : MonoBehaviour
     
     private void InitializeState()
     {
+
         ChangeState(currentState);
     }
     
     private void HandleStateChangeRequest()
     {
+        GameObject minigame = GameObject.FindWithTag("Minigame");
+        if(minigame != null) return;
+
         if (Time.time < _startStateChangeCooldownTime + playerData.StateChangeCooldown)
         {
             OnStateChangeBlocked?.Invoke();
@@ -112,5 +122,11 @@ public class PlayerController : MonoBehaviour
             IClickable clickable = hit.collider.GetComponent<IClickable>();
             clickable?.OnClick();
         }
+    }
+
+    private void UpdateAnimations()
+    {
+        animator.SetBool("Despertar", currentState == PlayerState.Awaken);
+        animator.SetBool("Dormir", currentState == PlayerState.Asleep);
     }
 }
