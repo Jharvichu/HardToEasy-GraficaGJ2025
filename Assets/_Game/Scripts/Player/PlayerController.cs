@@ -76,6 +76,9 @@ public class PlayerController : MonoBehaviour
     
     private void HandleStateChangeRequest()
     {
+        GameObject minigame = GameObject.FindWithTag("Minigame");
+        if(minigame != null) return;
+
         if (Time.time < _startStateChangeCooldownTime + playerData.StateChangeCooldown)
         {
             OnStateChangeBlocked?.Invoke();

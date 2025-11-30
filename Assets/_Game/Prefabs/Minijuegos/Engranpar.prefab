@@ -591,7 +591,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 3599387949407312928}
-  rangoMovimiento: 150
 --- !u!1 &5527748092806136416
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +835,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 711958390224952557}
-  rangoMovimiento: 150
 --- !u!1 &6184911154663868476
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +925,7 @@ GameObject:
   - component: {fileID: 8902970913334633697}
   m_Layer: 5
   m_Name: Engranpar
-  m_TagString: Untagged
+  m_TagString: Minigame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1267,7 +1265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 1586281048949204493}
-  rangoMovimiento: 150
 --- !u!1 &8347179883511442892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 3162589070830020802}
-  rangoMovimiento: 150
 --- !u!1 &8637125531703196156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1445,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HojaEngrapable
   zonaEngrapado: {fileID: 5676815906578214623}
-  rangoMovimiento: 150
 --- !u!1 &8648131914442348968
 GameObject:
   m_ObjectHideFlags: 0
