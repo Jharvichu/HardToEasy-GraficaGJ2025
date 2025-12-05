@@ -57,3 +57,8 @@ Darle click al icono de *portafolio* o *perdorador* para acceder a los siguiente
 - **[Pedro Antonio Alfaro Vargas](https://github.com/pv4r)** – Arte, Programacion IA 
 - **[Diego Edson Bayes Santos](https://github.com/FixerCoda)** – Programacion Player, Managers
 - **[Luis ALberto Alanya Campos](https://github.com/AlbeCamp21)** – Audio, Programacion Minijuegos
+
+## Referencias de los assets
+
+- Parallax: **[Modern City Backgrounds Pixel Art](https://free-game-assets.itch.io/free-city-backgrounds-pixel-art)**
+- TileMap: **[Pixel Interior](hthttps://mrdakerchan.itch.io/top-down-pixel-interior)**
