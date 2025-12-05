@@ -1,0 +1,62 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Game/Scripts/UI/Credits/CreditsStyle.uss?fileID=7433441132597879392&amp;guid=1371fe01453f60e49b69440fe16edbc7&amp;type=3#CreditsStyle" />
+    <ui:VisualElement class="pantalla-negra">
+        <ui:VisualElement name="ContenedorCreditos" picking-mode="Ignore" class="columna-creditos">
+            <ui:Label text="OFFICE DREAMER" class="titulo-juego" />
+            <ui:Label text="STAFF &amp; CREDITS" class="rol-texto" style="font-size: 20px; margin-bottom: 80px;" />
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="DIRECCIÓN" class="rol-texto" />
+                <ui:Label text="Cadillo Tarazona, Jharvy Jonas" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="GAME DESIGN" class="rol-texto" />
+                <ui:Label text="Vargas Alfaro, Pedro Antonio" class="nombre-texto" />
+                <ui:Label text="(Idea Original)" class="etiqueta-pequena" style="color: grey; font-size: 18px;" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="ENCARGADOS DEL ARTE" class="rol-texto" />
+                <ui:Label text="Cadillo Tarazona, Jharvy Jonas" class="nombre-texto" />
+                <ui:Label text="Alanya Campos, Luis Alberto" class="nombre-texto" />
+                <ui:Label text="Vargas Alfaro, Pedro Antonio" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="PROGRAMACIÓN: PLAYER CONTROLLER" class="rol-texto" />
+                <ui:Label text="Bayes Santos, Diego Edson" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="PROGRAMACIÓN: MINIJUEGOS" class="rol-texto" />
+                <ui:Label text="Alanya Campos, Luis Alberto" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="INTERFAZ DE USUARIO" class="rol-texto" />
+                <ui:Label text="Cadillo Tarazona, Jharvy Jonas" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="INTELIGENCIA ARTIFICIAL DEL JEFE" class="rol-texto" />
+                <ui:Label text="Vargas Alfaro, Pedro Antonio" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="ENCARGADO DEL SONIDO &amp; AUDIO" class="rol-texto" />
+                <ui:Label text="Alanya Campos, Luis Alberto" class="nombre-texto" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="bloque-credito">
+                <ui:Label text="AGRADECIMIENTOS ESPECIALES" class="rol-texto" />
+                <ui:Label text="Profesor Peter Jonathan Montalvo Garcia" class="nombre-texto" />
+                <ui:Label text="Universidad Nacional de Ingeniería" class="nombre-texto" />
+                <ui:Label text="Y a nuestras computadoras por aguantar" class="nombre-texto" style="font-size: 24px; color: grey;" />
+            </ui:VisualElement>
+
+            <ui:Label text="GRACIAS POR JUGAR" class="mensaje-final" />
+        </ui:VisualElement>
+        <ui:Button text="SALIR" name="BtnSalir" class="boton-salir-fijo" />
+    </ui:VisualElement>
+</ui:UXML>
